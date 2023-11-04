@@ -1,0 +1,55 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.weylan.ProtostuffTagGenerator</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>Protostuff Tag Generator</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="weylan@126.com" url="https://www.weypage.com">weylan</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+        <p>Add Protostuff @Tag annotations to fields.</p>
+        <p>One-click to add @Tag annotations.</p>
+        <p>See https://protostuff.github.io/docs/protostuff-runtime/</p>
+        <p>How to use:</p>
+        <p>Code -> Generate (Windows: Ctrl+Insert, macOS: Ctrl+Enter) -> Generate Protostuff Tags</p>
+        <p>Features:</p>
+        <p>One-click to generate @Tag annotations.</p>
+        <p>One-click to delete @Tag annotations.</p>
+        <p>Check for duplicate @Tag annotations.</p>
+        <p>Quickly fix @Tag annotations.</p>
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.java</depends>
+    <depends>org.jetbrains.kotlin</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <localInspection language="JAVA"
+                         displayName="Duplicating the @Tag annotation is not allowed."
+                         groupPath="Java"
+                         groupBundle="messages.InspectionsBundle"
+                         groupKey="group.names.probable.bugs"
+                         enabledByDefault="true"
+                         level="ERROR"
+                         implementationClass="com.weylan.protostuff.tag.generator.TagCheckInspection"/>
+
+    </extensions>
+    <actions>
+        <action id="com.weylan.tag.generator" class="com.weylan.protostuff.tag.generator.GenerateAction"
+                text="Generate Protostuff Tags" description="Annotate class field with protostuff @Tag">
+            <add-to-group group-id="GenerateGroup" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
