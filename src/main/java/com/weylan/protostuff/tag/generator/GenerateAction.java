@@ -37,6 +37,9 @@ public class GenerateAction extends AnAction {
         dialog.pack();
         dialog.setVisible(true);
         WriteCommandAction.writeCommandAction(psiClass.getContainingFile().getProject(), psiClass.getContainingFile()).run(() -> {
+           if(!Boolean.TRUE.equals(dialog.isOk())){
+               return;
+           }
             if (dialog.isDelOnlyDelete()) {
                 delTags(psiClass);
                 return;

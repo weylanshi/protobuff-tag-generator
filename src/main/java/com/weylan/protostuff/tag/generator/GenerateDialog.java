@@ -14,6 +14,8 @@ public class GenerateDialog extends JDialog {
     private JCheckBox cbxOnlyDel;
     private JTextField tagStartValue;
 
+    private Boolean isOK;
+
     public GenerateDialog() {
         setTitle("Protostuff Tag Generator");
         setContentPane(contentPane);
@@ -51,11 +53,13 @@ public class GenerateDialog extends JDialog {
 
     private void onOK() {
         // add your code here
+        this.isOK = Boolean.TRUE;
         dispose();
     }
 
     private void onCancel() {
         // add your code here if necessary
+        this.isOK=Boolean.FALSE;
         dispose();
     }
 
@@ -76,6 +80,10 @@ public class GenerateDialog extends JDialog {
 
     public boolean isTagTransientFields() {
         return cbxTagTransientField.isSelected();
+    }
+
+    public boolean isOk(){
+        return this.isOK;
     }
 
 
